@@ -1,0 +1,338 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Valentine 💖</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Comic Sans MS', cursive;
+  overflow:hidden;
+}
+
+/* PAGE */
+.page{
+  display:none;
+  height:100vh;
+  width:100vw;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  position:relative;
+}
+.page.active{display:flex}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:22px;
+  width:90%;
+  max-width:360px;
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  position:relative;
+  z-index:20;
+}
+.card *{
+  position:relative;
+  z-index:30;
+}
+
+/* BUTTONS */
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  margin:8px 0;
+  cursor:pointer;
+}
+button:active{transform:scale(.95)}
+.pink{background:#ff6fa5;color:#fff}
+.soft{background:#ffe1ee}
+
+/* INPUT */
+input{
+  width:100%;
+  padding:14px;
+  border-radius:25px;
+  border:2px solid #ffb3d9;
+  font-size:16px;
+  margin-bottom:10px;
+  outline:none;
+}
+
+/* GIFS */
+.gif{
+  position:absolute;
+  max-width:100px;
+  z-index:10;
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+  100%{transform:translateY(0)}
+}
+.draggable{
+  touch-action:none;
+  cursor:grab;
+}
+
+/* HEARTS */
+.hearts{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.heart{
+  position:absolute;
+  animation:heartFloat 6s linear infinite;
+}
+@keyframes heartFloat{
+  0%{transform:translateY(100vh)}
+  100%{transform:translateY(-10vh);opacity:0}
+}
+
+/* PAGE 4 */
+.love-photo{
+  width:100%;
+  max-width:240px;
+  border-radius:14px;
+  margin:10px auto;
+}
+
+/* PAGE 8 */
+.rip-text{
+  font-size:28px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD PAGE -->
+<div class="page active" id="passwordPage">
+  <div class="card">
+    <h2>🔐 Secret Valentine</h2>
+    <p>Only for my baby 💕</p>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button class="pink" onclick="checkPassword()">Unlock 💖</button>
+    <p id="error" style="display:none;color:#ff4d6d;">Wrong password 🥺</p>
+  </div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page" id="p1">
+  <img src="p1a.gif" class="gif draggable" style="top:5%;left:5%">
+  <img src="p1b.gif" class="gif draggable" style="top:5%;right:5%">
+  <img src="p1c.gif" class="gif draggable" style="bottom:5%;left:5%">
+  <img src="p1d.gif" class="gif draggable" style="bottom:5%;right:5%">
+  <img src="p1e.gif" class="gif draggable" style="top:40%;left:8%">
+  <img src="p1f.gif" class="gif draggable" style="top:40%;right:8%">
+
+  <div class="card">
+    <button class="pink">Hello baby girl 💕</button>
+    <button class="pink" onclick="go(2)">Open it 💖</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <img src="p2a.gif" class="gif draggable" style="top:8%;left:5%">
+  <img src="p2b.gif" class="gif draggable" style="top:8%;right:5%">
+  <img src="p2c.gif" class="gif draggable" style="bottom:8%;left:5%">
+  <img src="p2d.gif" class="gif draggable" style="bottom:8%;right:5%">
+  <img src="p2e.gif" class="gif draggable" style="top:45%;left:8%">
+  <img src="p2f.gif" class="gif draggable" style="top:45%;right:8%">
+
+  <div class="card">
+    <h2>Will you be my Valentine? 💘</h2>
+    <button class="pink" onclick="go(3)">Yes 💖✨</button>
+    <button class="soft" onclick="go(5)">No 🥹</button>
+    <button class="soft" onclick="go(6)">Maybe 🎀✨</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <div class="hearts" id="hearts"></div>
+
+  <img src="p3a.gif" class="gif draggable" style="top:8%;left:5%">
+  <img src="p3b.gif" class="gif draggable" style="top:8%;right:5%">
+  <img src="p3c.gif" class="gif draggable" style="bottom:8%;left:5%">
+  <img src="p3d.gif" class="gif draggable" style="bottom:8%;right:5%">
+  <img src="p3e.gif" class="gif draggable" style="top:45%;left:8%">
+  <img src="p3f.gif" class="gif draggable" style="top:45%;right:8%">
+
+  <div class="card">
+    <button class="pink" onclick="go(4)">🐱😚</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <img src="p4a.gif" class="gif draggable" style="top:8%;left:5%">
+  <img src="p4b.gif" class="gif draggable" style="top:8%;right:5%">
+  <img src="p4c.gif" class="gif draggable" style="bottom:8%;left:5%">
+  <img src="p4d.gif" class="gif draggable" style="bottom:8%;right:5%">
+  <img src="p4e.gif" class="gif draggable" style="top:45%;left:8%">
+  <img src="p4f.gif" class="gif draggable" style="top:45%;right:8%">
+
+  <div class="card">
+    <h1>I LOVE YOU BABY GIRL</h1>
+    <img src="photo.jpg" class="love-photo">
+    <p>🎀✨💘💖🫦</p>
+    <button class="pink" onclick="go(1)">Start again</button>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <img src="p5a.gif" class="gif draggable" style="top:10%;left:5%">
+  <img src="p5b.gif" class="gif draggable" style="top:10%;right:5%">
+  <img src="p5c.gif" class="gif draggable" style="bottom:10%;left:5%">
+  <img src="p5d.gif" class="gif draggable" style="bottom:10%;right:5%">
+  <img src="p5e.gif" class="gif draggable" style="top:45%;left:8%">
+  <img src="p5f.gif" class="gif draggable" style="top:45%;right:8%">
+
+  <div class="card">
+    <h2>😿</h2>
+    <button class="pink" onclick="go(1)">You have lost -- start from the beginning</button>
+  </div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+  <img src="p6a.gif" class="gif draggable" style="top:10%;left:5%">
+  <img src="p6b.gif" class="gif draggable" style="top:10%;right:5%">
+  <img src="p6c.gif" class="gif draggable" style="bottom:10%;left:5%">
+  <img src="p6d.gif" class="gif draggable" style="bottom:10%;right:5%">
+  <img src="p6e.gif" class="gif draggable" style="top:45%;left:8%">
+  <img src="p6f.gif" class="gif draggable" style="top:45%;right:8%">
+
+  <div class="card">
+    <button class="pink" onclick="go(4)">Yes 💖</button>
+    <button class="soft" onclick="go(7)">Maybe 😿</button>
+  </div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="p7">
+  <img src="p7a.gif" class="gif draggable" style="top:10%;left:5%">
+  <img src="p7b.gif" class="gif draggable" style="top:10%;right:5%">
+  <img src="p7c.gif" class="gif draggable" style="bottom:10%;left:5%">
+  <img src="p7d.gif" class="gif draggable" style="bottom:10%;right:5%">
+  <img src="p7e.gif" class="gif draggable" style="top:45%;left:8%">
+  <img src="p7f.gif" class="gif draggable" style="top:45%;right:8%">
+
+  <div class="card">
+    <h2>🥺😿🥹</h2>
+    <button class="pink" onclick="go(4)">Yes 💖</button>
+    <button class="soft" onclick="go(8)">Final maybe 🥹</button>
+  </div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="p8">
+  <img src="p8a.gif" class="gif draggable" style="top:10%;left:5%">
+  <img src="p8b.gif" class="gif draggable" style="top:10%;right:5%">
+  <img src="p8c.gif" class="gif draggable" style="bottom:10%;left:5%">
+  <img src="p8d.gif" class="gif draggable" style="bottom:10%;right:5%">
+  <img src="p8e.gif" class="gif draggable" style="top:45%;left:8%">
+  <img src="p8f.gif" class="gif draggable" style="top:45%;right:8%">
+
+  <div class="card">
+    <div class="rip-text">i just a baby 🥺😿</div>
+    <button class="pink" onclick="go(1)">Re-life</button>
+  </div>
+</div>
+
+<script>
+/* PASSWORD */
+const CORRECT_PASSWORD = "babygirl";
+
+function checkPassword(){
+  if(passwordInput.value === CORRECT_PASSWORD){
+    passwordPage.classList.remove("active");
+    passwordPage.style.display="none";
+    go(1);
+  }else{
+    error.style.display="block";
+  }
+}
+
+/* PAGE NAVIGATION */
+function go(n){
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+    p.style.display="none";
+  });
+
+  const target = document.getElementById("p"+n);
+  if(!target) return;
+
+  target.style.display="flex";
+  requestAnimationFrame(()=>target.classList.add("active"));
+
+  if(n===3){startHearts()}else{stopHearts()}
+}
+
+/* HEARTS */
+let heartTimer=null;
+function startHearts(){
+  stopHearts();
+  const c=document.getElementById("hearts");
+  if(!c) return;
+  heartTimer=setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.textContent="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(14+Math.random()*20)+"px";
+    c.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },500);
+}
+function stopHearts(){
+  if(heartTimer){clearInterval(heartTimer);heartTimer=null;}
+}
+
+/* DRAG */
+let active=null,ox=0,oy=0;
+function startDrag(e){
+  if(!e.target.classList.contains("draggable")) return;
+  active=e.target;
+  const r=active.getBoundingClientRect();
+  const p=e.touches?e.touches[0]:e;
+  ox=p.clientX-r.left;
+  oy=p.clientY-r.top;
+}
+function moveDrag(e){
+  if(!active) return;
+  e.preventDefault();
+  const p=e.touches?e.touches[0]:e;
+  let x=p.clientX-ox;
+  let y=p.clientY-oy;
+  x=Math.max(0,Math.min(x,innerWidth-active.offsetWidth));
+  y=Math.max(0,Math.min(y,innerHeight-active.offsetHeight));
+  active.style.left=x+"px";
+  active.style.top=y+"px";
+}
+function endDrag(){active=null;}
+
+document.addEventListener("mousedown",startDrag);
+document.addEventListener("mousemove",moveDrag);
+document.addEventListener("mouseup",endDrag);
+document.addEventListener("touchstart",startDrag,{passive:false});
+document.addEventListener("touchmove",moveDrag,{passive:false});
+document.addEventListener("touchend",endDrag);
+</script>
+
+</body>
+</html>
