@@ -1,0 +1,181 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Valentine 💖</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Comic Sans MS', cursive;
+  overflow:hidden;
+}
+
+/* PAGE */
+.page{
+  display:none;
+  height:100vh;width:100vw;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:20px;
+}
+.page.active{display:flex}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:22px;
+  width:90%;
+  max-width:360px;
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  z-index:2;
+}
+
+/* BUTTONS */
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  margin:8px 0;
+  cursor:pointer;
+}
+.pink{background:#ff6fa5;color:#fff}
+.soft{background:#ffe1ee}
+
+/* GIFS */
+.gif{
+  position:absolute;
+  max-width:100px;
+  z-index:1;
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+  100%{transform:translateY(0)}
+}
+
+/* HEARTS */
+.hearts{position:absolute;inset:0;pointer-events:none}
+.heart{
+  position:absolute;
+  animation:heartFloat 6s linear infinite;
+}
+@keyframes heartFloat{
+  0%{transform:translateY(100vh)}
+  100%{transform:translateY(-10vh);opacity:0}
+}
+
+/* PAGE 4 */
+.love-photo{
+  width:100%;
+  max-width:240px;
+  border-radius:14px;
+  margin:10px auto;
+}
+
+.rip-text{font-size:30px;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div class="page active" id="passwordPage">
+  <div class="card">
+    <h2>🔐 Secret Valentine</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button class="pink" onclick="checkPassword()">Unlock 💖</button>
+    <p id="error" style="display:none;color:red">Wrong password 🥺</p>
+  </div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page" id="p1">
+  <img src="p1a.gif" class="gif" style="top:5%;left:5%">
+  <img src="p1b.gif" class="gif" style="top:5%;right:5%">
+  <img src="p1c.gif" class="gif" style="bottom:5%;left:5%">
+  <img src="p1d.gif" class="gif" style="bottom:5%;right:5%">
+  <img src="p1e.gif" class="gif" style="top:40%;left:10%">
+  <img src="p1f.gif" class="gif" style="top:40%;right:10%">
+
+  <div class="card">
+    <button class="pink">Hello baby girl 💕</button>
+    <button class="pink" onclick="go(2)">Open it 💖</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <img src="p2a.gif" class="gif" style="top:10%;left:5%">
+  <img src="p2b.gif" class="gif" style="top:10%;right:5%">
+  <img src="p2c.gif" class="gif" style="bottom:10%;left:5%">
+  <img src="p2d.gif" class="gif" style="bottom:10%;right:5%">
+  <img src="p2e.gif" class="gif" style="top:40%;left:10%">
+  <img src="p2f.gif" class="gif" style="top:40%;right:10%">
+
+  <div class="card">
+    <h2>Will you be my Valentine? 💘</h2>
+    <button class="pink" onclick="go(3)">Yes 💖✨</button>
+    <button class="soft" onclick="go(5)">No 🥹</button>
+    <button class="soft" onclick="go(6)">Maybe 🎀✨</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <div class="hearts" id="hearts"></div>
+  <img src="p3a.gif" class="gif" style="top:10%;left:5%">
+  <img src="p3b.gif" class="gif" style="top:10%;right:5%">
+  <img src="p3c.gif" class="gif" style="bottom:10%;left:5%">
+  <img src="p3d.gif" class="gif" style="bottom:10%;right:5%">
+  <img src="p3e.gif" class="gif" style="top:40%;left:10%">
+  <img src="p3f.gif" class="gif" style="top:40%;right:10%">
+
+  <div class="card">
+    <button class="pink" onclick="go(4)">🐱😚</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <img src="p4a.gif" class="gif" style="top:10%;left:5%">
+  <img src="p4b.gif" class="gif" style="top:10%;right:5%">
+  <img src="p4c.gif" class="gif" style="bottom:10%;left:5%">
+  <img src="p4d.gif" class="gif" style="bottom:10%;right:5%">
+  <img src="p4e.gif" class="gif" style="top:40%;left:10%">
+  <img src="p4f.gif" class="gif" style="top:40%;right:10%">
+
+  <div class="card">
+    <h1>I LOVE YOU BABY GIRL</h1>
+    <img src="photo.jpg" class="love-photo">
+    <p>🎀✨💘💖🫦</p>
+    <button class="pink" onclick="go(1)">Start again</button>
+  </div>
+</div>
+
+<!-- PAGE 5–8 can be added similarly (same pattern) -->
+
+<script>
+const CORRECT_PASSWORD="babygirl";
+function checkPassword(){
+  if(passwordInput.value===CORRECT_PASSWORD){
+    passwordPage.classList.remove("active");
+    p1.classList.add("active");
+  }else error.style.display="block";
+}
+function go(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+}
+</script>
+
+</body>
+</html>
