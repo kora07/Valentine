@@ -1,0 +1,222 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Valentine 💖</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Comic Sans MS', cursive;
+  overflow:hidden;
+}
+
+/* PAGE */
+.page{
+  display:none;
+  position:relative;
+  height:100vh;width:100vw;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+.page.active{display:flex}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:22px;
+  width:90%;
+  max-width:360px;
+  z-index:5;
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+/* BUTTONS */
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  margin:8px 0;
+  cursor:pointer;
+}
+.pink{background:#ff6fa5;color:#fff}
+.soft{background:#ffe1ee}
+
+/* INPUT */
+input{
+  width:100%;
+  padding:14px;
+  border-radius:25px;
+  border:2px solid #ffb3d9;
+  font-size:16px;
+  margin-bottom:10px;
+}
+
+/* GIFS */
+.gif{
+  position:absolute;
+  width:90px;
+  pointer-events:auto;
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+  100%{transform:translateY(0)}
+}
+
+/* PHOTO SLOT */
+.love-photo{
+  width:100%;
+  max-width:240px;
+  border-radius:14px;
+  margin:10px auto;
+}
+
+/* PAGE 8 */
+.rip-text{font-size:26px;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD PAGE -->
+<div class="page active" id="passwordPage" style="background:#ffe6ef">
+  <div class="card">
+    <h2>🔐 Secret Valentine</h2>
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button class="pink" onclick="checkPassword()">Unlock 💖</button>
+    <p id="error" style="color:red;display:none">Wrong password 🥺</p>
+  </div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page" id="p1" style="background:#ffe6ef">
+  <img src="p1a.gif" class="gif">
+  <img src="p1b.gif" class="gif">
+  <div class="card">
+    <button class="pink">Hello baby girl 💕</button>
+    <button class="pink" onclick="go(2)">Open it 💖</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2" style="background:#fff0f7">
+  <img src="p2a.gif" class="gif">
+  <img src="p2b.gif" class="gif">
+  <div class="card">
+    <h2>Will you be my Valentine? 💘</h2>
+    <button class="pink" onclick="go(3)">Yes 💖</button>
+    <button class="soft" onclick="go(5)">No 🥹</button>
+    <button class="soft" onclick="go(6)">Maybe 🎀</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3" style="background:#ffd1e8">
+  <img src="p3a.gif" class="gif">
+  <div class="card">
+    <button class="pink" onclick="go(4)">🐱😚</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4" style="background:linear-gradient(135deg,#ffb3d9,#d6b3ff);color:white">
+  <div class="card">
+    <h1>I LOVE YOU BABY GIRL</h1>
+    <img src="photo.jpg" class="love-photo">
+    <p>🎀✨💘💖🫦</p>
+    <button class="pink">I LOVE YOU BABY GIRL</button>
+    <button class="soft" onclick="go(1)">Start again</button>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5" style="background:#fff">
+  <img src="p5a.gif" class="gif">
+  <div class="card">
+    <h2>😿</h2>
+    <button class="pink" onclick="go(1)">You have lost -- start again</button>
+  </div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6" style="background:#fff5fb">
+  <img src="p6a.gif" class="gif">
+  <div class="card">
+    <button class="pink" onclick="go(4)">Yes 💖</button>
+    <button class="soft" onclick="go(7)">Maybe 😿</button>
+  </div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="p7" style="background:#fff">
+  <img src="p7a.gif" class="gif">
+  <div class="card">
+    <h2>🥺😿🥹</h2>
+    <button class="pink" onclick="go(4)">Yes 💖</button>
+    <button class="soft" onclick="go(8)">Final maybe 🥹</button>
+  </div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="p8" style="background:#ffd6e8">
+  <img src="p8a.gif" class="gif">
+  <div class="card">
+    <div class="rip-text">i just a baby 🥺😿</div>
+    <button class="pink" onclick="go(1)">Re-life</button>
+  </div>
+</div>
+
+<script>
+const PASSWORD = "babygirl";
+
+function checkPassword(){
+  if(passwordInput.value===PASSWORD){
+    passwordPage.classList.remove("active");
+    p1.classList.add("active");
+    positionGifs();
+  }else{
+    error.style.display="block";
+  }
+}
+
+function go(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+  positionGifs();
+}
+
+function positionGifs(){
+  document.querySelectorAll(".gif").forEach(g=>{
+    g.style.left = Math.random()*70 + "vw";
+    g.style.top  = Math.random()*70 + "vh";
+    drag(g);
+  });
+}
+
+function drag(el){
+  let x=0,y=0,dx=0,dy=0;
+  el.onpointerdown=e=>{
+    dx=e.clientX; dy=e.clientY;
+    document.onpointermove=ev=>{
+      x += ev.clientX-dx;
+      y += ev.clientY-dy;
+      dx=ev.clientX; dy=ev.clientY;
+      el.style.left=x+"px";
+      el.style.top=y+"px";
+    };
+    document.onpointerup=()=>document.onpointermove=null;
+  };
+}
+</script>
+
+</body>
+</html>
